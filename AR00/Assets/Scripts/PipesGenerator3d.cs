@@ -9,7 +9,7 @@ public class PipesGenerator3d : MonoBehaviour
     private class Pipe
     {
         public float x;
-        public float y;
+        public float z;
         public int length;
         public string axis;
     }
@@ -19,7 +19,7 @@ public class PipesGenerator3d : MonoBehaviour
         public Pipe[] pipe;
     }
     private PipeList pipes = new PipeList();
-    public GameObject pipeCube;
+    public GameObject pipeCyllinder;
 
     void Awake()
     {
@@ -27,33 +27,33 @@ public class PipesGenerator3d : MonoBehaviour
 
         for (int i = 0; i < pipes.pipe.Length; i++)
         {
-            DrawPipe(pipeCube, pipes.pipe[i].x, pipes.pipe[i].y, pipes.pipe[i].length, pipes.pipe[i].axis);
+            DrawPipe(pipeCyllinder, pipes.pipe[i].x, pipes.pipe[i].z, pipes.pipe[i].length, pipes.pipe[i].axis);
         }
     }
 
-    void DrawPipe(GameObject cube, float x, float z, int length, string axis)
+    void DrawPipe(GameObject cyllinder, float x, float z, int length, string axis)
     {
         switch (axis)
         {
             case "x":
                 for (float i = 0; i < (float)length; i += 1f)
                 {
-                    DrawCube(cube, x + i, z);
+                    DrawCyllinder(cyllinder, x + i, z, axis);
                 }
                 break;
             case "z":
                 for (float i = 0; i < (float)length; i += 1f)
                 {
-                    DrawCube(cube, x, z + i);
+                    DrawCyllinder(cyllinder, x, z + i, axis);
                 }
                 break;
             default: //Error
                 break;
         }
     }
-    void DrawCube(GameObject cube, float x, float z)
+    void DrawCyllinder(GameObject cyllinder, float x, float z, string axis)
     {
-        cube = Instantiate(cube, new Vector3(x, -0.5f, z), Quaternion.identity);
-        cube.transform.parent = this.transform;
+        cyllinder = Instantiate(cyllinder, new Vector3(x, -2f, z), Quaternion.Euler(90, 90 * System.Convert.ToInt32(axis == "x"), 0));
+        cyllinder.transform.parent = this.transform;
     }
 }
