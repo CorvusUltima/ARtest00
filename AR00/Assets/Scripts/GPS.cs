@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GPS : MonoBehaviour
 {
 
@@ -20,18 +21,16 @@ public class GPS : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         StartCoroutine(StartLocationService());
 
-
-
-
     }
 
     private IEnumerator StartLocationService()
     {
-
         if(!Input.location.isEnabledByUser)
         {
             Debug.Log("GPS location is not enabled");
+            Application.Quit();
             yield break;
+          
         }
 
         Input.location.Start();
