@@ -10,8 +10,8 @@ public class GPS : MonoBehaviour
     public static GPS Instance { set; get; }
 
 
-    public float latitude;
-    public float longitude;
+    public double latitude;
+    public double longitude;
 
 
     private void Start()
