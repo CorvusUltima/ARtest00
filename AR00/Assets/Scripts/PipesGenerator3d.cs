@@ -12,6 +12,7 @@ public class PipesGenerator3d : MonoBehaviour
         public float z;
         public int length;
         public string axis;
+      
     }
     [System.Serializable]
     private class PipeList
@@ -20,15 +21,17 @@ public class PipesGenerator3d : MonoBehaviour
     }
     private PipeList pipes = new PipeList();
     public GameObject pipeCyllinder;
+    private int pipeGeneratorCount = 0;
 
     void Awake()
     {
         pipes = JsonUtility.FromJson<PipeList>(jsonFile.text);
-
-        for (int i = 0; i < pipes.pipe.Length; i++)
-        {
-            DrawPipe(pipeCyllinder, pipes.pipe[i].x, pipes.pipe[i].z, pipes.pipe[i].length, pipes.pipe[i].axis);
-        }
+       
+            for (int i = 0; i < pipes.pipe.Length; i++)
+            {
+                DrawPipe(pipeCyllinder, pipes.pipe[i].x, pipes.pipe[i].z, pipes.pipe[i].length, pipes.pipe[i].axis);
+            }
+       
     }
 
     void DrawPipe(GameObject cyllinder, float x, float z, int length, string axis)
@@ -53,7 +56,9 @@ public class PipesGenerator3d : MonoBehaviour
     }
     void DrawCyllinder(GameObject cyllinder, float x, float z, string axis)
     {
-        cyllinder = Instantiate(cyllinder, new Vector3(x, -2f, z), Quaternion.Euler(90, 90 * System.Convert.ToInt32(axis == "x"), 0));
-        cyllinder.transform.parent = this.transform;
+       
+            cyllinder = Instantiate(cyllinder, new Vector3(x, -2f, z), Quaternion.Euler(90, 90 * System.Convert.ToInt32(axis == "x"), 0));
+            cyllinder.transform.parent = this.transform;
+
     }
 }

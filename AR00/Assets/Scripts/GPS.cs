@@ -30,7 +30,6 @@ public class GPS : MonoBehaviour
             Debug.Log("GPS location is not enabled");
             Application.Quit();
             yield break;
-          
         }
 
         Input.location.Start();

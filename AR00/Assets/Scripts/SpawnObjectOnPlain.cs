@@ -16,7 +16,7 @@ public class SpawnObjectOnPlain : MonoBehaviour
 
     List<GameObject> placedPreFabList = new List<GameObject>();
     [SerializeField]
-    private int maxPreFabSpawnCount = 100;
+    private int maxPreFabSpawnCount = 1;
     private int objectCounter = 0;
 
 
@@ -56,7 +56,6 @@ public class SpawnObjectOnPlain : MonoBehaviour
             {
                 placedPreFabList[objectCounter] = Instantiate(placeblePreFab, hitPose.position, hitPose.rotation);
                 placedPreFabList[objectCounter].transform.rotation = hitPose.rotation;
-                objectCounter++;
 
             }
             else Debug.Log("there is to much objects to be spawned ");
